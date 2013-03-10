@@ -1,0 +1,77 @@
+
+{% extends 'cocoandco/base.html' %}
+<script src="{{STATIC_URL}}js/createpost.js"></script>
+{{ block.super }}
+
+{% block content %}
+<div class="bigupperline"></div>
+<div class="span8 offset2">
+<div class="well">
+ <form class="form-horizontal well" method='post' action='/createpost/' enctype='multipart/form-data'>
+ 	{% csrf_token %}
+        {% for hidden in form.hidden_fields %}
+            {{ hidden }}
+        {% endfor %}
+        <fieldset>
+          <legend>Create post</legend>
+          <div class="control-group">
+          	
+            <label class="control-label" for="input01">{{form.title.help_text}}</label>
+            <div class="controls">
+              <!-- <input type="text" class="input-xlarge" id="input01"> -->
+              {{ form.title }}
+              <p class="help-block">Please choose a question to be answerable as yes or no</p>
+              <span style='color:red;'>{{ form.title.errors}}</span>
+            </div>
+            
+          </div>
+		  
+          <div class="control-group">
+          	
+            <label class="control-label" for="textarea">{{ form.description.help_text}}</label>
+            <div class="controls">
+              <!-- <textarea class="input-xlarge" id="textarea" rows="3"></textarea> -->
+              {{ form.description }}
+              <span style='color:red;'>{{ form.description.errors}}</span>
+            </div>
+            
+          </div>
+          <div class="control-group">
+          	
+            <label class="control-label" for="multiSelect">{{ form.categories.help_text}}</label>
+            <div class="controls">
+            	{{ form.categories}}
+            	<span style='color:red;'>{{form.categories.errors}}</span>
+            </div>
+            
+          </div>
+          <div class="control-group">
+          	
+            <label class="control-label" for="fileInput">{{ form.img.help_text}}</label>
+            <div class="controls">
+              <!-- <input class="input-file" id="fileInput" type="file"> -->
+              {{ form.img}}
+              <span style='color:red;'>{{ form.img.errors}}</span>
+            </div>
+ 			  
+          </div>
+		  <!-- <div class="control-group">
+            <label class="control-label" for="optionsCheckbox">Make it private</label>
+            <div class="controls">
+              <label class="checkbox">
+                <input type="checkbox" id="optionsCheckbox" value="option1">
+                Only people who have link to the page will be able to see the question.
+              </label>
+            </div>
+          </div> -->
+          
+          <div class="form-actions">
+            <button type="submit" class="btn btn-primary" name='submit'>Post the question</button>
+            <button type="reset" class="btn" id="resetBut">Reset</button>
+          </div>
+        </fieldset>
+      </form>
+</div>
+</div> 
+{% endblock %}
+

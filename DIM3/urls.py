@@ -1,5 +1,7 @@
 from django.conf.urls import patterns, include, url
 
+from cocoandco import views
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
@@ -14,4 +16,9 @@ urlpatterns = patterns('',
 
     # Uncomment the next line to enable the admin:
      url(r'^admin/', include(admin.site.urls)),
+     url(r'^createpost/$', views.createpost, name='createpost'),
+     url(r'^post/(?P<post_id_url>\d+)/$', views.post, name='post'),
+     url(r'^$', views.index, name='index'),
+     url(r'^cat/(?P<category_name>\w+)', views.category, name='category'),
+     
 )

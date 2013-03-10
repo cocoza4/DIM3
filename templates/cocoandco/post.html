@@ -1,0 +1,105 @@
+
+{% extends 'cocoandco/base.html' %}
+
+<div id="username" style="visibility:hidden;display:inline;">{{usr.username}}</div>
+
+{{ block.super }}
+
+
+{% block content %}
+<link href="{{STATIC_URL}}js/colorbox-1.3.18/example4/colorbox.css" rel="stylesheet" media="screen"/>
+<script type="text/javascript" src='{{STATIC_URL}}js/colorbox-1.3.18/colorbox/jquery.colorbox-min.js'></script>
+<script type="text/javascript" src='{{STATIC_URL}}js/colorbox-1.3.18/colorbox/jquery.colorbox.js'></script>
+<script type="text/javascript" src="{{STATIC_URL}}js/post.js"></script>
+<div style='display:none;'>
+	<div id='comment_dlg' style='padding:10px; background:#fff;font: sans-serif; font-size: 15px;'>
+		<h3><font color = 'gray'>{{post_obj.title}}</font></h3>
+			<div style = 'border-bottom: 1px solid #BBBBBB;'></div><br/>
+			<form id = 'commentForm' class="form-horizontal well" method='post' action='/post/{{post_obj.id}}/' enctype='multipart/form-data'>
+				{% csrf_token %}
+                {% for hidden in commentForm.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+				<table>
+                {% for field in commentForm.visible_fields %}
+                    <tr>
+                    	<td>{{ field.help_text}}&nbsp;&nbsp;&nbsp;</td>
+                    	<td>{{ field }}{{ field.errors }}</td>
+                    </tr>
+                {% endfor %}
+                </table>
+                <br/>
+                <div style='clear:both;'></div>
+                <center><INPUT type="button" id="commentBut" value="Comment" /></center>
+			</form>
+			
+	</div>
+</div>
+<div class="row">
+
+	<div class="upperline"> </div>
+</div>
+
+<div class="row">
+
+<div class="span8">
+	<h2>{{post_obj.title}}</h2>
+	<p>{{post_obj.description}}</p>
+</div>
+
+<div class="span4">
+<div class="well">
+<a class="callbacks cboxElement" href="{{STATIC_URL}}imgs/{{post_obj.id}}.jpg">
+	<img src="{{STATIC_URL}}imgs/{{post_obj.id}}">
+</a>
+</div>
+</div>
+
+</div>
+<button class="btn btn-primary" id='comment'>Comment</button>
+<div class="well">
+<div class="row">
+              <div class="span5"></div>
+			    <div class="span1"><button class="btn btn-success" >Yes </button></div>
+               <div class="span1"> <button class="btn btn-danger" >No </button></div>
+              
+				 <div class="span5"></div>
+</div>
+<div class="upperline"> </div>
+
+<div class="progress">
+  <div class="bar bar-success" style="width: 45%;"></div>
+  <div class="bar bar-danger" style="width: 55%;"></div>
+</div>
+
+</div>
+
+
+	<div class="row">
+		{% for comment in comments_list %}
+		<div class="span3">
+			<div class="alert alert-error">
+	              <strong>{{comment.owner}}</strong> {{comment.description}}
+	              <div>{{comment.date_time}}</div>
+			</div>
+		</div>
+		{% endfor %}
+		<!--<div class="span3">
+			<div class="alert alert-error">
+	 			Oh snap! Change a few things up and try submitting again.
+			</div>
+		</div>
+	
+		<div class="span3">
+			<div class="alert alert-success">
+	  			Oh snap! Change a few things up and try submitting again.
+			</div>
+		</div>
+	
+		<div class="span3">
+			<div class="alert alert-info">
+				Oh snap! Change a few things up and try submitting again.
+		   	</div>
+		</div>-->
+	</div>
+{% endblock %}

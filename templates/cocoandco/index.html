@@ -1,0 +1,78 @@
+{% extends 'cocoandco/base.html' %}
+<div id="username" style="visibility:hidden;display:inline;">{{usr.username}}</div>
+{{ block.super }}
+{% block content %}
+<script src="{{STATIC_URL}}js/index.js"></script>
+<div class="row">
+	<div class="upperline"> </div>
+</div>
+
+<div class="row">
+
+<div class="span12">
+<div class="bigupperline"> </div>
+</div>
+
+</div>
+<div class="row">
+
+<div class="span4 offset4">
+<button id="create_question_but" class="btn btn-large btn-block btn-success" type="button">Create question</button>
+</div>
+
+</div>
+<div class="row">
+
+<div class="span12">
+<div class="bigupperline"> </div>
+</div>
+
+</div>
+
+<small>
+<ul class="nav nav-pills" id="headers" style="text-align:center">
+
+        <li class="active"><a href="/cat/hot">Hot topics</a></li>
+        <li><a href="/cat/new">New topics</a></li>
+        <li><a href="/cat/music">Music</a></li>
+		<li><a href="/cat/education">Education</a></li>
+		<li><a href="/cat/history">History</a></li>
+		<li><a href="/cat/science">Science</a></li>
+		<li><a href="/cat/politics">Politics</a></li>
+		<li><a href="/cat/sport">Sport</a></li>
+		<li><a href="/cat/economy">Economy</a></li>
+		<li><a href="/cat/society">Society</a></li>
+        <li><a href="/cat/technology">Technology</a></li>
+		<li><a href="/cat/world">World</a></li>
+		<li><a href="/cat/other">Other</a></li>
+		
+		
+</ul>
+
+<div class="row">
+	{% for post in posts_list %}
+	<div class="span6">
+		
+		<div class="well">
+			
+			<div class="row">
+				<div class="span2">
+					<img src="{{STATIC_URL}}imgs/{{post.id}}">
+				</div>
+				<div class="span3">
+				
+      	       		<a href="/post/{{post.id}}"><h4><strong>{{post.title}}</h4></a>
+				
+				</div>
+				<div>{{post.date_time}}</div>
+			</div>
+			
+		</div>
+		
+	</div>
+	{% endfor %}
+
+	</div>
+</small>
+{% endblock %}
+

@@ -1,5 +1,5 @@
 
-from cocoandco.models import Comment, Post, Image_Post, URL_Post
+from cocoandco.models import Comment, Post, Choice
 from django.contrib import admin
 
     
@@ -16,22 +16,15 @@ class CommentAdmin(admin.ModelAdmin):
 class PostAdmin(admin.ModelAdmin):
     
     def __unicode__(self):
-        return self.owner
+        return self.title
     
-    list_display= ('owner', 'category', 'like')
-    list_filter = ['category', 'date_time', 'rating']
+    list_display= ('owner', 'like')
+    list_filter = ['date_time', 'rating']
     search_fields = ['owner']
     date_hierarchy = "date_time"
-    
-class Image_PostAdmin(PostAdmin):
-    pass
 
-class URL_PostAdmin(PostAdmin):
-    pass
-
+admin.site.register(Choice)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Post, PostAdmin)
-admin.site.register(Image_Post, Image_PostAdmin)
-admin.site.register(URL_Post, URL_PostAdmin)
 
 

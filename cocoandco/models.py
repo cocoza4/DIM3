@@ -2,39 +2,44 @@
 from django.db import models
 from datetime import datetime
 from django.contrib.auth.models import User
+from django import forms
+
+post_category = (
+        (u'music', u'Music'),
+        (u'sport', u'Sport'),
+        (u'education', u'Education'),
+        (u'history', u'History'),
+        (u'science', u'Science'),
+        (u'politics', u'Politics'),
+        (u'technology', u'Technology'),
+        (u'economy', u'Economy'),
+        (u'society', u'Society'),
+        (u'world', u'World'),
+    )    
 
 
 
-    
 class Post(models.Model):
     
     def __unicode__(self):
         return self.owner.username
     
-    post_category = (
-        (u'music', u'Music'),
-        (u'sports', u'Sports'),
-        (u'education', u'Education'),
-        (u'np', u'News & Politics'),
-        (u'comedy', u'Comedy'),
-        (u'technology', u'Technology'),
-        (u'gaming', u'Gaming'),
-        (u'fashion', u'Fashion'),
-        (u'travel', u'Travel'),
-    )
-    
     date_time = models.DateTimeField(default=datetime.now())
     owner = models.ForeignKey(User)
     rating = models.PositiveIntegerField(default=0)
-    category = models.CharField(max_length=10, choices=post_category)
+    img = models.ImageField(upload_to='imgs', blank=True)
     like = models.PositiveIntegerField(default=0)
-    title = models.CharField(max_length=1024)
+    title = models.CharField(max_length=256)
+    description = models.CharField(max_length=1024)
     
-class Image_Post(Post):
-    img = models.ImageField(upload_to='imgs', blank=False)
+class Choice(models.Model):
     
-class URL_Post(Post):
-    url = models.URLField(blank=False)
+    def __unicode__(self):
+        return self.post.title
+    
+    post = models.ForeignKey(Post)
+    category = models.CharField(max_length=10, choices=post_category)
+
     
 class Comment(models.Model):
     
@@ -45,12 +50,29 @@ class Comment(models.Model):
     owner = models.ForeignKey(User)
     post = models.ForeignKey(Post)
     flag = models.PositiveIntegerField(default=0)
-    description = models.CharField(unique=True, max_length=1024)
+    description = models.CharField(max_length=1024)
 
 
-
-
-
+# Model Forms
+class PostForm(forms.ModelForm):
+    title = forms.CharField(max_length=256, help_text='Question')
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows':3}), help_text='Add a description', max_length=1024)
+    categories = forms.MultipleChoiceField(widget = forms.SelectMultiple, 
+                 choices = post_category, required = True, help_text='Choose categories')
+    img = forms.ImageField(help_text='Upload a picture', required=False)
+    
+    
+    class Meta:
+        model = Post
+        fields = ('categories', 'title','description', 'img', )
+        
+class CommentForm(forms.ModelForm):
+    description = forms.CharField(widget=forms.Textarea(attrs={'rows':3, 'id': 'text'}), help_text='Your comment', 
+                                  required=True, max_length=1024)
+    
+    class Meta:
+        model = Comment
+        fields = ('description', )
 
 
 
