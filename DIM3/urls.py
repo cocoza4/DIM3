@@ -19,6 +19,9 @@ urlpatterns = patterns('',
      url(r'^createpost/$', views.createpost, name='createpost'),
      url(r'^post/(?P<post_id_url>\d+)/$', views.post, name='post'),
      url(r'^$', views.index, name='index'),
+     url(r'^login/$', views.login, name='login'),
      url(r'^cat/(?P<category_name>\w+)', views.category, name='category'),
+     url(r'^register/$', views.register, name='register'),
+     url(r'^user/(?P<user_id_url>\d+)/$', views.user, name='user'),
      
 )

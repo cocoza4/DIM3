@@ -15,6 +15,7 @@ $(document).ready(function(){
 			$('#commentForm').submit();
 		else
 			alert('Please add your comment!');
+		return true;
 	});
 	
 });

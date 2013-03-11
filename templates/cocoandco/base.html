@@ -7,39 +7,62 @@
 	    <link href="{{STATIC_URL}}css/custom.css" rel="stylesheet" media="screen">
 	    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 	    <script src="http://code.jquery.com/jquery-migrate-1.1.0.js"></script>
-	    <!-- <script src={{STATIC_URL}}js/jquery-1.7.2.min.js></script> -->
 		<script src="{{STATIC_URL}}js/bootstrap.min.js"></script>
-		
+		<script src="{{STATIC_URL}}js/base.js"></script>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 		<title>Coco & Co -- Every question we have answer </title>
 	</head>
 	<body>
-		{% block header %}
-		<div class="navbar navbar-static-top">
+			{% block header %}
 			
-			<div class="navbar-inner">
-			     <div class="container">
-			       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-			         <span class="icon-bar"></span>
-			         <span class="icon-bar"></span>
-			         <span class="icon-bar"></span>
-			       </a>
-			       <a class="brand" href="/">Coco & Co</a>
-			
-				<div class="span4"></div>
-			      <form class="form-inline" id="main-menu-right">
-			  <input type="text" class="input-small" placeholder="Email">
-			  <input type="password" class="input-small" placeholder="Password">
-			  <label class="checkbox">
-			    <input type="checkbox"> Remember me
-			  </label>
-			  <button type="submit" class="btn">Sign in</button>
-			</form>
-			     </div>
-			   </div>
-			
-		</div>
-		{% endblock %}
+			<div class="navbar navbar-static-top">
+				
+				<div class="navbar-inner">
+					
+				     <div class="container">
+				     	
+				       <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+				         <span class="icon-bar"></span>
+				         <span class="icon-bar"></span>
+				         <span class="icon-bar"></span>
+				       </a>
+				       <a class="brand" href="/">Coco & Co</a>
+
+					<div id='searchbar'>
+					<input type='text' id='searchtxt' placeholder='search for question'/>
+					<ul class="topnav">
+						
+							<li>
+						        <ul class="subnav">
+						            <li><a href="#"><input type="checkbox" class='category' value='education'/>&nbsp;Education</a></li>
+									<li><a href="#"><input type="checkbox" class='category' value='history'/>&nbsp;History</a></li>
+									<li><a href="#"><input type="checkbox" class='category' value='science'/>&nbsp;Science</a></li>
+									<li><a href="#"><input type="checkbox" class='category' value='politics'/>&nbsp;Politics</a></li>
+									<li><a href="#"><input type="checkbox" class='category' value='sport'/>&nbsp;Sport</a></li>
+									<li><a href="#"><input type="checkbox" class='category' value='economy'/>&nbsp;Economy</a></li>
+									<li><a href="#"><input type="checkbox" class='category' value='society'/>&nbsp;Society</a></li>
+							        <li><a href="#"><input type="checkbox" class='category' value='technology'/>&nbsp;Technology</a></li>
+									<li><a href="#"><input type="checkbox" class='category' value='world'/>&nbsp;World</a></li>
+									<li><a href="#"><input type="checkbox" class='category' value='other'/>&nbsp;Other</a></li>
+						            <li><a href="#"><button id='searchBut' style='height:25px;' type="submit" class="btn">
+													Search</button></a></li>
+						        </ul>
+						    </li>
+						</ul>
+					</div>
+				      <form class="form-inline" id="main-menu-right" method='post' action='/login/'>
+
+						  <input type="text" id='usernametxt' class="input-small" placeholder="Username" name='username'/>
+						  <input type="password" id='passwdtxt' class="input-small" placeholder="Password" name='passwd'/>
+						  <!-- <label class="checkbox">
+						    <input type="checkbox"> Remember me
+						  </label> -->
+						  <input type='submit' class='btn' id='loginBut' value='Sign in'/>
+					</form>
+				     </div>
+				   </div>
+			</div>
+			{% endblock %}
 		<div class="container">{% block content %}{% endblock %}</div>
 		<div id="footer">{% block footer %}<center>Footer</center><br/>{% endblock %}</div>
 	</body>

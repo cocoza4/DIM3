@@ -1,5 +1,5 @@
 
-from cocoandco.models import Comment, Post, Choice
+from cocoandco.models import Comment, Post, Choice, Member
 from django.contrib import admin
 
     
@@ -24,6 +24,7 @@ class PostAdmin(admin.ModelAdmin):
     date_hierarchy = "date_time"
 
 admin.site.register(Choice)
+admin.site.register(Member)
 admin.site.register(Comment, CommentAdmin)
 admin.site.register(Post, PostAdmin)
 

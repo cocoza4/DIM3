@@ -1,33 +1,34 @@
 {% extends 'cocoandco/base.html' %}
 <div id="username" style="visibility:hidden;display:inline;">{{usr.username}}</div>
-{{ block.super }}
 {% block content %}
 <script src="{{STATIC_URL}}js/index.js"></script>
-<div class="row">
+<!-- <div class="row">
 	<div class="upperline"> </div>
-</div>
+</div> -->
 
-<div class="row">
-
-<div class="span12">
-<div class="bigupperline"> </div>
-</div>
-
-</div>
-<div class="row">
-
-<div class="span4 offset4">
-<button id="create_question_but" class="btn btn-large btn-block btn-success" type="button">Create question</button>
-</div>
-
-</div>
-<div class="row">
+<!-- <div class="row">
 
 <div class="span12">
 <div class="bigupperline"> </div>
 </div>
 
+</div> -->
+<br/>
+{% if usr != None %}
+	<div class="row">
+	
+	<div class="span4 offset4">
+	<button id="create_question_but" class="btn btn-large btn-block btn-success" type="button">Create question</button>
+	</div>
+	
+	</div>
+{% endif %}
+<br/>
+<!-- <div class="row">
+<div class="span12">
+<div class="bigupperline"> </div>
 </div>
+</div> -->
 
 <small>
 <ul class="nav nav-pills" id="headers" style="text-align:center">
@@ -57,7 +58,7 @@
 			
 			<div class="row">
 				<div class="span2">
-					<img src="{{STATIC_URL}}imgs/{{post.id}}">
+					<img src="{{STATIC_URL}}imgs/{{post.img}}" height="100" width="100" />
 				</div>
 				<div class="span3">
 				
